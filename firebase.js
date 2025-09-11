@@ -1,26 +1,40 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp} from "firebase/app";
+import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { Firestore, getFirestore } from "firebase/firestore";
-
-
-// import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+import { collection,getDoc,doc, getFirestore, setDoc, addDoc, getDocs, updateDoc, deleteDoc } from "firebase/firestore";
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
-};
+    
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID,
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-export const db= getFirestore(app)
-export const auth =getAuth(app);
-// const analytics = getAnalytics(app);
+
+
+  };
+  const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app);
+export const db = getFirestore(app);export const usersCollection = collection(db, "users");
+export const coursesCollection = collection(db, "courses");export const setUserRole = async(userId, role)=>{
+    setDoc(doc(db, "users", userId), {role});
+};
+export const getUserRole = async(userId)=>{
+    try{
+        const userDoc = await getDoc(doc(db, "users", userId));
+        return userDoc.exists()? userDoc.data().role : null;
+    }catch(error){
+        alert(error.message)
+    }
+};export const addCourse = (course)=>{
+    addDoc(coursesCollection, course);
+}
+export const getCourses = async()=>{
+    const snapshot = await getDocs(coursesCollection);
+    return snapshot.docs.map(doc=>({id:doc.id,...doc.data()}));
+};export const updateCourse = (id, course)=>{
+    updateDoc(doc(db, "courses", id), course);
+}
+export const deleteCourse = (id)=>{
+    deleteDoc(doc(db, "courses", id));
+}
