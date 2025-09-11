@@ -2,17 +2,14 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { collection,getDoc,doc, getFirestore, setDoc, addDoc, getDocs, updateDoc, deleteDoc } from "firebase/firestore";
 const firebaseConfig = {
-    
-    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-    appId: import.meta.env.VITE_FIREBASE_APP_ID,
-
-
-
-  };
+apiKey: "AIzaSyD6w9UXbSwSZ7Aw8ZUhrxt-bHnMu3k2xYE",
+ authDomain: "ecofeast-5ff01.firebaseapp.com",
+projectId: "ecofeast-5ff01",
+storageBucket: "ecofeast-5ff01.firebasestorage.app",
+messagingSenderId: "111524926453",
+appId: "1:111524926453:web:cad7d24952f5f4be5a06bc",
+ measurementId: "G-RCM88L20YL"
+ };
   const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);export const usersCollection = collection(db, "users");
