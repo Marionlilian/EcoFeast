@@ -5,6 +5,7 @@ import Login from './components/Login'
 import AdminDashboard from './admin/AdminDashboard'
 import NonprofitDashboard from './Ngo/NonprofitDashboard'
 import UserDashboard from './userdash/UserDashboard'
+import Home from './Home'
 
 function App() {
   return (
@@ -14,9 +15,10 @@ function App() {
       <Route path="/admin/AdminDashboard" element={<AdminDashboard />} />
       <Route path="/Ngo/NonprofitDashboard" element={<NonprofitDashboard />} />
       <Route path="/userdash/UserDashboard" element={<UserDashboard />} />
+      <Route path='/Home' element={<Home/>}/>
 
-      {/* Default redirect to /login */}
-      <Route path="/" element={<Navigate to="/login" />} />
+      
+      <Route path="/" element={<Navigate to="/Home" />} />
     </Routes>
   );
 }
