@@ -23,7 +23,6 @@ function Register() {
   };
   return (
     <div>
-      <Navbar />
       <div className="px-2 py-2 grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1">
         <div className="max-w-xl mx-16 px-8 py-6 bg-white rounded-lg shadow-md space-y-4">
           <h1 className="text-2xl font-bold text-center text-gray-800">

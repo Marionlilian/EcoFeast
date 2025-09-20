@@ -1,54 +1,15 @@
-import React from "react";
-import { signOut } from "firebase/auth";
-import { auth } from "../../firebase";
-import { useNavigate } from "react-router-dom";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import { Link } from "react-router-dom";
-function UserDashboard() {
-  const navigate = useNavigate();
-  const handleLogout = async () => {
-    try {
-      await signOut(auth);
-      navigate("/login");
-    } catch (error) {
-      alert("Logout Failed:" + error.message);
-    }
-  };
+import React from 'react'
+
+const ShareFood = () => {
   return (
     <div>
-      <Navbar />
+      <button onClick={handleLogout} 
+      className="w-full py-4 px-6 bg-green-600 text-white font-semibold rounded-md hover:bg-green-700 transition"
+      >
+        Log Out
+        </button>
 
-     <div className="flex items-center justify-between px-4 py-6 bg-green-500 text-white text-xl font-bold gap-4">
-  <div className="flex gap-4">
-    <Link
-      to="/userdash/UserDashboard"
-      className="py-2 px-4 bg-green-600 text-white font-semibold rounded-md hover:bg-green-700 transition"
-    >
-      Share Food
-    </Link>
-    <Link
-      to="/userdash/UserMessages"
-      className="py-2 px-4 bg-green-600 text-white font-semibold rounded-md hover:bg-green-700 transition"
-    >
-      Messages
-    </Link>
-    <Link
-      to="/userdash/UserHistory"
-      className="py-2 px-4 bg-green-600 text-white font-semibold rounded-md hover:bg-green-700 transition"
-    >
-      Past Donations
-    </Link>
-  </div>
-
-  <button
-    onClick={handleLogout}
-    className="py-2 px-4 bg-red-600 text-white font-semibold rounded-md hover:bg-red-700 transition"
-  >
-    Log Out
-  </button>
-</div>
- <div className="max-w-lg justify-center shadow-lg bg-white mx-auto px-4 py-6 rounded-2xl">
+        <div className="max-w-lg justify-center shadow-lg bg-white mx-auto px-4 py-6 rounded-2xl">
   <h1 className="text-xl font-bold mb-4 text-center text-green-500">Help reduce waste and feed people in need</h1>
   <form className="space-y-4">
 
@@ -133,9 +94,9 @@ function UserDashboard() {
 </div>
 
 
-      <Footer />
+
     </div>
-  );
+  )
 }
 
-export default UserDashboard;
+export default ShareFood

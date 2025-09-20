@@ -40,7 +40,6 @@ function Login() {
   };
   return (
     <div>
-      <Navbar />
       <div className="px-2 py-2 grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1">
         <div className="relative h-[32rem] w-full flex items-center justify-center text-center text-white px-12 py-4">
           <img
@@ -54,7 +53,7 @@ function Login() {
             <h1 className="text-3xl md:text-4xl font-bold">
               Don't Have an Account?
             </h1>
-            <p className="mt-2 mb-8 text-lg">Join the Family with one click</p>{" "}
+            <p className="mt-2 mb-8 text-lg">Join the Family with one click</p>
             <br />
             <a
               href="/Register"
@@ -67,7 +66,7 @@ function Login() {
 
         <div className="max-w-xl mx-16 px-8 py-12 bg-white rounded-lg shadow-md space-y-4">
           <h1 className="text-2xl font-bold text-center text-gray-800">
-            LOG IN{" "}
+            LOG IN
           </h1>
 
           <div className="justify-center">
