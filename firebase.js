@@ -12,8 +12,10 @@ appId: "1:111524926453:web:cad7d24952f5f4be5a06bc",
  };
   const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
-export const db = getFirestore(app);export const usersCollection = collection(db, "users");
-export const coursesCollection = collection(db, "courses");export const setUserRole = async(userId, role)=>{
+export const db = getFirestore(app);
+export const usersCollection = collection(db, "users");
+export const donationsCollection = collection(db, "donations");
+export const setUserRole = async(userId, role)=>{
     setDoc(doc(db, "users", userId), {role});
 };
 export const getUserRole = async(userId)=>{
@@ -23,15 +25,16 @@ export const getUserRole = async(userId)=>{
     }catch(error){
         alert(error.message)
     }
-};export const addCourse = (course)=>{
-    addDoc(coursesCollection, course);
+};export const addDonation = (donation)=>{
+    addDoc(donationsCollection, donation);
 }
-export const getCourses = async()=>{
-    const snapshot = await getDocs(coursesCollection);
+export const getDonations = async()=>{
+    const snapshot = await getDocs(donationsCollection);
     return snapshot.docs.map(doc=>({id:doc.id,...doc.data()}));
-};export const updateCourse = (id, course)=>{
-    updateDoc(doc(db, "courses", id), course);
+};
+export const updateDonation = (id, course)=>{
+    updateDoc(doc(db, "donations", id), course);
 }
-export const deleteCourse = (id)=>{
-    deleteDoc(doc(db, "courses", id));
+export const deleteDonation = (id)=>{
+    deleteDoc(doc(db, "donations", id));
 }

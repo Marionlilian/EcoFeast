@@ -8,6 +8,7 @@ function Home() {
 
   return (
     <div>
+      <Navbar/>
       <div className="hero-container relative w-full h-screen text-white">
         <video
           autoPlay
