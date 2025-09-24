@@ -2,7 +2,7 @@ import React from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { auth, setUserRole } from "../../firebase";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 function Register() {
@@ -23,6 +23,7 @@ function Register() {
   };
   return (
     <div>
+      <Navbar/>
       <div className="px-2 py-2 grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1">
         <div className="max-w-xl mx-16 px-8 py-6 bg-white rounded-lg shadow-md space-y-4">
           <h1 className="text-2xl font-bold text-center text-gray-800">
@@ -107,13 +108,16 @@ function Register() {
               Already a Member?
             </h1>
             <p className="mt-2 mb-8 text-lg">Log in with Email & Password</p> <br />
-            <a href="/Login" className="mt-2 px-6 py-2 bg-white text-green-600 font-semibold rounded-lg shadow hover:bg-gray-100 transition">
-              LOG IN
-            </a>
+            <Link to={"/Login"}
+              className="mt-2 px-6 py-2 bg-white text-green-600 font-semibold rounded-lg shadow hover:bg-gray-100 transition"
+            > LOG IN
+              
+            </Link>
           </div>
         </div>
       </div>
       <Footer />
+      
     </div>
   );
 }

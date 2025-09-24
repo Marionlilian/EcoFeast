@@ -32,13 +32,8 @@ function Home() {
           [animation:pulse_1.5s_ease-in-out_infinite] 
           [@keyframes_pulse:{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}] 
           hover:bg-green-700">Donate Now
-          
-
           </Link>
-          {/* <a href="/Register" className="bg-green-500 text-white px-2 py-2 rounded text-2xl 
-          [animation:pulse_1.5s_ease-in-out_infinite] 
-          [@keyframes_pulse:{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}] 
-          hover:bg-green-700">Donate Now </a> */}
+         
         </div>
       </div>
       <div>

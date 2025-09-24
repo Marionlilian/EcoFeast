@@ -13,10 +13,10 @@ function Login() {
   const navigate = useNavigate();
   const handleLogin = async () => {
     try {
-      // sign in user
+     
       const res = await signInWithEmailAndPassword(auth, email, password);
       const user = res.user;
-      //   await getUserRole(user.uid);      // get user document
+      //   await getUserRole(user.uid);     
       const docRef = doc(db, "users", user.uid);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
@@ -40,6 +40,7 @@ function Login() {
   };
   return (
     <div>
+      <Navbar/>
       <div className="px-2 py-2 grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1">
         <div className="relative h-[32rem] w-full flex items-center justify-center text-center text-white px-12 py-4">
           <img
@@ -55,12 +56,12 @@ function Login() {
             </h1>
             <p className="mt-2 mb-8 text-lg">Join the Family with one click</p>
             <br />
-            <a
-              href="/Register"
-              className="mt-2 px-6 py-2 bg-white text-green-600 font-semibold rounded-lg shadow hover:bg-gray-100 transition"
+            <Link to={'/Register'}
+            className="mt-2 px-6 py-2 bg-white text-green-600 font-semibold rounded-lg shadow hover:bg-gray-100 transition"
             >
               Register
-            </a>
+            </Link>
+            
           </div>
         </div>
 
