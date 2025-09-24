@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
@@ -28,10 +28,17 @@ function Home() {
           <p className="max-w-2xl text-base sm:text-lg leading-relaxed mb-6">
             This platform connects sources of food with individuals and communities in need, helping to reduce hunger and promote food security.
           </p>
-          <a href="/Register" className="bg-green-500 text-white px-2 py-2 rounded text-2xl 
+          <Link to="/Register" className="bg-green-500 text-white px-2 py-2 rounded text-2xl 
           [animation:pulse_1.5s_ease-in-out_infinite] 
           [@keyframes_pulse:{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}] 
-          hover:bg-green-700">Donate Now </a>
+          hover:bg-green-700">Donate Now
+          
+
+          </Link>
+          {/* <a href="/Register" className="bg-green-500 text-white px-2 py-2 rounded text-2xl 
+          [animation:pulse_1.5s_ease-in-out_infinite] 
+          [@keyframes_pulse:{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}] 
+          hover:bg-green-700">Donate Now </a> */}
         </div>
       </div>
       <div>
