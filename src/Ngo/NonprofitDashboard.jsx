@@ -2,6 +2,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { auth } from '../../firebase';
+import Navbar from "../components/Navbar";
 function NonprofitDashboard() {
     const navigate = useNavigate();
 
@@ -18,9 +19,15 @@ function NonprofitDashboard() {
 
   return (
     <div>
-      <h1>NGO here</h1>
+      <Navbar/>
+      <div>
+         <h1>NGO here</h1>
 
-      <button onClick={handleLogout}>Logout</button>
+      <button onClick={handleLogout} 
+      className='px-2 py-2 text-white text-lg rounded right-0 bg-red-300'
+      >Logout</button>
+
+      </div>
     </div>
     
 

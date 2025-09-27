@@ -304,12 +304,11 @@ function UserDashboard() {
                       {donation.pickupTime}
                     </p>
                     <p className="text-sm text-gray-700">
-  Best Before:{" "}
-  {donation.bestBefore?.toDate
-    ? donation.bestBefore.toDate().toLocaleDateString()
-    : donation.bestBefore}
-</p>
-
+                      Best Before:{" "}
+                      {donation.bestBefore?.toDate
+                        ? donation.bestBefore.toDate().toLocaleDateString()
+                        : donation.bestBefore}
+                    </p>
 
                     <p className="text-sm text-gray-700">
                       Contact: {donation.contact}
