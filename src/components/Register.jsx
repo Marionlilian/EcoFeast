@@ -1,7 +1,7 @@
 import React from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { auth, setUserRole } from "../../firebase";
+import { auth, setUserRole } from "../../firebase/firebase";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";

@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import { signOut } from "firebase/auth";
-import { auth } from "../../firebase";
+import { auth } from "../../firebase/firebase";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import MessageNav from "./MessageNav";

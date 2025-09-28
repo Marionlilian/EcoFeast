@@ -1,5 +1,5 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth, db, getUserRole } from "../../firebase";
+import { auth, db, getUserRole } from "../../firebase/firebase";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getDoc, doc } from "firebase/firestore";
