@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { signOut } from "firebase/auth";
-import { auth } from "../../firebase/firebase";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import MessageNav from "./MessageNav";
-import {  HiUser } from "react-icons/hi";
-function UserMessages() {
+import { auth, db } from "../../firebase/firebase";
+import { Link, useNavigate } from "react-router-dom";
+import { collection, query, where, getDocs, doc, getDoc } from "firebase/firestore";
+
+function UserDashboard() {
   const navigate = useNavigate();
+  const [donations, setDonations] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const handleLogout = async () => {
     try {
       await signOut(auth);
@@ -16,6 +18,40 @@ function UserMessages() {
       alert("Logout Failed:" + error.message);
     }
   };
+
+  useEffect(() => {
+    const fetchDonations = async () => {
+      const user = auth.currentUser;
+      if (!user) return;
+
+      try {
+        const q = query(collection(db, "donations"), where("postedBy", "==", user.uid));
+        const snapshot = await getDocs(q);
+
+        const data = await Promise.all(
+          snapshot.docs.map(async (docSnap) => {
+            const donation = { id: docSnap.id, ...docSnap.data() };
+
+            if (donation.bookedBy) {
+              const ngoDoc = await getDoc(doc(db, "users", donation.bookedBy));
+              donation.bookedByEmail = ngoDoc.exists() ? ngoDoc.data().email : "Unknown NGO";
+            }
+
+            return donation;
+          })
+        );
+
+        setDonations(data);
+      } catch (err) {
+        console.error("Error fetching donations:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDonations();
+  }, []);
+
   return (
     <div>
       <Navbar />
@@ -31,14 +67,9 @@ function UserMessages() {
             to="/userdash/UserMessages"
             className="py-2 px-4 bg-green-600 text-white font-semibold rounded-md hover:bg-green-700 transition"
           >
-            Messages
+            Donation Status
           </Link>
-          <Link
-            to="/userdash/UserHistory"
-            className="py-2 px-4 bg-green-600 text-white font-semibold rounded-md hover:bg-green-700 transition"
-          >
-            Past Donations
-          </Link>
+          
         </div>
 
         <button
@@ -49,39 +80,57 @@ function UserMessages() {
         </button>
       </div>
 
-     <div className="grid grid-cols-1 md:grid-cols-4 mx-auto mb-0 bottom-0 my-4 max-w-6xl shadow-lg rounded-lg bottom-0">
-  <div className="hidden md:block col-span-1">
-    <MessageNav />
-  </div>
-  <div className="col-span-3 bg-gray-300">
-    <div className="chat-nav flex shadow-lg mx-4 my-2 bg-green-700 px-4 py-3 justify-between">  
-      <img src={"/happykid.jpg"} alt=""
-      className="h-10 w-10 rounded-full"
-      />
-      <p>User 1</p>
-      
-      
+      <div className="max-w-6xl mx-auto my-6 p-4 bg-white shadow-md rounded-lg">
+        <h2 className="text-2xl font-bold mb-4">My Donations</h2>
 
-    </div>
+        {loading ? (
+          <p>Loading donations...</p>
+        ) : donations.length === 0 ? (
+          <p>You have not posted any donations yet.</p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {donations.map((donation) => (
+              <div
+                key={donation.id}
+                className="p-4 border rounded-lg shadow-sm bg-gray-50"
+              >
+                <h3 className="text-lg font-semibold">{donation.foodName}</h3>
+                <p className="text-sm text-gray-600">
+                  Quantity: {donation.quantity}
+                </p>
+                <p className="text-sm text-gray-600">
+                  Status:{" "}
+                  <span
+                    className={
+                      donation.status === "booked"
+                        ? "text-red-600 font-bold"
+                        : "text-green-600 font-bold"
+                    }
+                  >
+                    {donation.status}
+                  </span>
+                </p>
 
-    <div className="bottom-0 mb-0 right-0 mx-2 my-2">
-      <input type="text" 
-      className="px-2 py-2 w-1/2 border border-gree-500 rounded-lg"
-      placeholder="Your Message ..."
-      />
-      <button
-      className="mx-2 my-2 bg-green-500 px-2 py-2 rounded text-white text-lg hover:bg-green-900">
-        Send
-         
-      </button>
-    </div>
-    
-  </div>
-</div>
-
-     
+                {donation.status === "booked" && (
+                  <>
+                    <p className="text-sm text-blue-700 mt-1">
+                      Booked by: {donation.bookedByEmail || "Unknown NGO"}
+                    </p>
+                    <Link
+                      to={`/userdash/UserMessages?recipient=${donation.bookedBy}&donation=${donation.id}`}
+                      className="mt-2 inline-block bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-700"
+                    >
+                      Message NGO
+                    </Link>
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
 
-export default UserMessages;
+export default UserDashboard;

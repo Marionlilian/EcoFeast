@@ -16,12 +16,14 @@ export const bookDonation = async (donationId) => {
   if (!user) throw new Error("User must be logged in");
 
   const donationRef = doc(db, "donations", donationId);
+  
 
   await updateDoc(donationRef, {
-    bookedBy: user.uid,
-    bookingDate: serverTimestamp(),
-    status: "booked",
-  });
+  bookedBy: user.uid,
+  bookingDate: serverTimestamp(),
+  status: "booked",  
+});
+
 
   await addDoc(collection(db, "bookings"), {
     donationId,
@@ -70,10 +72,11 @@ export const cancelBooking = async (donationId) => {
 };
 
 export const getAvailableDonations = async () => {
-  const q = query(collection(db, "donations"), where("bookedBy", "==", null));
+  const q = query(collection(db, "donations"), where("status", "==", "available"));
   const snapshot = await getDocs(q);
   return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 };
+
 
 export const sendMessage = async (recipientId, donationId, message) => {
   const user = auth.currentUser;

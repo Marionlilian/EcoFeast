@@ -139,14 +139,9 @@ function UserDashboard() {
             to="/userdash/UserMessages"
             className="py-2 px-4 bg-green-600 rounded hover:bg-green-700 transition"
           >
-            Messages
+            Donations Status
           </Link>
-          <Link
-            to="/userdash/UserHistory"
-            className="py-2 px-4 bg-green-600 rounded hover:bg-green-700 transition"
-          >
-            Past Donations
-          </Link>
+          
         </div>
 
         <button
@@ -290,6 +285,8 @@ function UserDashboard() {
                     </p>
                     <p className="text-sm">Contact: {donation.contact}</p>
                   </div>
+
+
 
                   <div className="flex gap-2">
                     <button
