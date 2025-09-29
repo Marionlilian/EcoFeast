@@ -58,7 +58,7 @@ const Navbar = () => {
               Login
             </Link>
             <Link to="/Contact" className="text-gray-700 dark:text-gray-300 hover:underline">
-              Contact
+              
             </Link>
              
           </div>

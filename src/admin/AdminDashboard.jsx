@@ -97,7 +97,7 @@ const AdminDashboard = () => {
         </div>
       </section>
 
-      <section className="mb-8">
+      {/* <section className="mb-8">
         <h2 className="text-xl font-semibold">User Verification</h2>
         <ul className="space-y-2 mt-2">
           {users.filter(u => !u.verified).map(user => (
@@ -110,7 +110,7 @@ const AdminDashboard = () => {
             </li>
           ))}
         </ul>
-      </section>
+      </section> */}
 
       <section>
         <h2 className="text-xl font-semibold">Recent Donations</h2>
