@@ -169,9 +169,7 @@ const NonprofitDashboard = () => {
                 className="p-4 border rounded flex justify-between items-center"
               >
                 <div>
-                  <p>
-                    <strong>Item:</strong> {booking.foodTitle}
-                  </p>
+                  <p><strong>Item:</strong> {booking.foodTitle || "Unknown"}</p>
                   <p>
                     <strong>Best Before:</strong>{" "}
                     {booking.bestBefore?.toDate
@@ -228,9 +226,7 @@ const NonprofitDashboard = () => {
             className="border px-3 py-2 w-2/3 mr-2"
           />
           <button
-            onClick={() =>
-              handleSendMessage("donorID123", "donationID123") 
-            }
+            onClick={() => handleSendMessage("donorID123", "donationID123")}
             className="bg-blue-500 text-white px-4 py-2 rounded"
           >
             Send
