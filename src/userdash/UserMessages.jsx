@@ -116,12 +116,12 @@ function UserDashboard() {
                     <p className="text-sm text-blue-700 mt-1">
                       Booked by: {donation.bookedByEmail || "Unknown NGO"}
                     </p>
-                    <Link
+                    {/* <Link
                       to={`/userdash/UserMessages?recipient=${donation.bookedBy}&donation=${donation.id}`}
                       className="mt-2 inline-block bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-700"
                     >
                       Message NGO
-                    </Link>
+                    </Link> */}
                   </>
                 )}
               </div>
